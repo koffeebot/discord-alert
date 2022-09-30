@@ -21,11 +21,11 @@ async function main() {
 
     const discordAlerts = new DiscordAlerts()
     const url = 'http://api.robo-vault.com/vaults'
-    const localurl = 'http://localhost:8080/vaults'
+    // const url = 'http://localhost:8080/vaults'
     discordAlerts.on('connect', async () => {
         const apiAlerts = await discordAlerts.channel('1024896275902124092')       
         Promise.all([
-            initApiMon(apiAlerts,localurl)
+            initApiMon(apiAlerts,url)
         ])
     })
 
