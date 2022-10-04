@@ -1,6 +1,6 @@
 
 import { DiscordAlerts, DiscordAlertsChannel } from './apis/discordalerts'
-import {ApiMonitor} from './monitor/api-monitor'
+import {ApiMonitor} from './monitors/api-monitor'
 
 
 process.on('unhandledRejection', async (error: any) => {

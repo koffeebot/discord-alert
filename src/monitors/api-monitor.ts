@@ -20,7 +20,7 @@ export class ApiMonitor {
     }
 
     async init () {
-        setInterval(this.apiCheck.bind(this), 60 * 1000)
+        setInterval(this.apiCheck.bind(this), 10 *  60 * 1000)
         setTimeout(this.apiCheck.bind(this), 2000)
     }
 
@@ -68,12 +68,12 @@ export class ApiMonitor {
         for(const vault of vaults){
             // console.log(vault)
             // console.log(vault.tvlUsd == 0)
-            if (!vault.tvlUsd || vault.tvlUsd == 0) {this.message += `Tvl is empty on ` + `${vault.chain} ` + `${vault.vaultId}` }
-            if (!vault.apy3d || vault.apy3d == 0) {this.message += 'apy3d is empty ' + `${vault.chain} ` + `${vault.vaultId}`}
-            if (!vault.apy7d || vault.apy7d == 0) {this.message += 'apy7d is empty ' + `${vault.chain} ` + `${vault.vaultId}`}
-            if (!vault.apy14d || vault.apy14d == 0) {this.message += 'apy14d is empty ' + `${vault.chain} ` + `${vault.vaultId}`}
-            if (!vault.apy28d || vault.apy28d == 0) {this.message += 'apy28d is empty ' + `${vault.chain} ` + `${vault.vaultId}`}
-            if(this.message === null) {this.sendAlert(this.message)}
+            if (!vault.tvlUsd || vault.tvlUsd == 0) {this.message += `Tvl is empty/no Value on ` + `${vault.chain} ` + `${vault.vaultId}` }
+            if (!vault.apy3d || vault.apy3d == 0) {this.message += 'apy3d is empty/no Value ' + `${vault.chain} ` + `${vault.vaultId}`}
+            if (!vault.apy7d || vault.apy7d == 0) {this.message += 'apy7d is empty/no Value ' + `${vault.chain} ` + `${vault.vaultId}`}
+            if (!vault.apy14d || vault.apy14d == 0) {this.message += 'apy14d is empty/no Value ' + `${vault.chain} ` + `${vault.vaultId}`}
+            if (!vault.apy28d || vault.apy28d == 0) {this.message += 'apy28d is empty/no Value ' + `${vault.chain} ` + `${vault.vaultId}`}
+            if (this.message === null) {this.sendAlert(this.message)}
   
         }
 
@@ -81,5 +81,9 @@ export class ApiMonitor {
 
     async sendAlert (message?:string) {
         this.alerts.send(message)
+    }
+
+    async log (error:string) {
+        this.alerts.send(error)
     }
 }
