@@ -1,4 +1,4 @@
-import { Client, Intents, TextChannel} from 'discord.js'
+import { Client, Intents, TextChannel } from 'discord.js'
 import { EventEmitter } from 'stream'
 import { Settings } from '../util/settings'
 import 'dotenv'
@@ -13,11 +13,11 @@ export class DiscordAlertsChannel {
 
     async connect (channelId: string): Promise<DiscordAlertsChannel> {
         console.log(`channel connected ${channelId}`)
-        let ch = await this.client.channels.cache.get(channelId) as TextChannel
+        let ch = this.client.channels.cache.get(channelId) as TextChannel
         if (!ch) {
             throw new Error('Failed to fetch Channel: ' + channelId)
         }
-        this.channel = ch as TextChannel
+        this.channel = ch
         return this
     }
 
@@ -43,7 +43,7 @@ export class DiscordAlerts extends EventEmitter {
             console.log('Discord API Connected')
             this.emit('connect')
         })
-        
+
         this.client.login(Settings.get('DISCORD_TOKEN'))
     }
 
