@@ -9,7 +9,9 @@
     "test": "cross-env LOG_LEVEL=silent jest",
     "dev": "NODE_ENV=DEV ts-node ./src/main.ts",
     "clean": "rm -rf ./build",
-    "build": "tsc",
+    "prebuild": "rm -rf dist",
+    "build": "esbuild ./src/main.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js",
+    "postbuild": "cd dist && zip -r index.zip index.js*",
     "start": "node ./build/main.js",
     "lint": "tslint --project .",
     "lint:fix": "npm run lint -- --fix",
@@ -40,6 +42,8 @@
     "typescript": "^3.9.10"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "@types/aws-lambda": "^8.10.106",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.15.10"
   }
 }
