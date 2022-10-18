@@ -1,7 +1,6 @@
 
 import { DiscordAlerts, DiscordAlertsChannel } from './apis/discordalerts'
 import { ApiMonitor } from './monitors/api-monitor'
-import { Context, APIGatewayProxyResult, APIGatewayEvent } from 'aws-lambda';
 
 process.on('unhandledRejection', async (error: any) => {
     if (typeof error !== 'object') {
