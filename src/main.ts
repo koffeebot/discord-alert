@@ -1,6 +1,7 @@
 
 import { DiscordAlerts, DiscordAlertsChannel } from './apis/discordalerts'
 import { ApiMonitor } from './monitors/api-monitor'
+import { Context, APIGatewayProxyResult, APIGatewayEvent } from 'aws-lambda';
 
 process.on('unhandledRejection', async (error: any) => {
     if (typeof error !== 'object') {
@@ -15,14 +16,15 @@ async function initApiMon (alerts: DiscordAlertsChannel, url: string) {
     const apiMonitor = new ApiMonitor(alerts, url)
     await apiMonitor.init()
 }
-
+ //disabled for hander
 async function main () {
 
     const discordAlerts = new DiscordAlerts()
-    // const url = 'http://api.robo-vault.com/vaults'
-    const url = 'http://localhost:8080/vaults'
+    const url = 'http://api.robo-vault.com/vaults'
+    // const url = 'http://localhost:8080/vaults'
     discordAlerts.on('connect', async () => {
-        const apiAlerts = await discordAlerts.channel('1024896275902124092')
+        // const apiAlerts = await discordAlerts.channel('1024896275902124092')
+        const apiAlerts = await discordAlerts.channel('1031704965229588540')
         Promise.all([
             initApiMon(apiAlerts,url)
         ])
