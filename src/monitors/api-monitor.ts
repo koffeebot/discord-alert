@@ -18,8 +18,8 @@ export class ApiMonitor {
     }
 
     async init () {
-        setInterval(this.apiCheck.bind(this), 60 * 1000)
-        setInterval(this.apiCheck.bind(this), 10 *  60 * 1000)
+        //interval of 10 mins
+        setInterval(this.apiCheck.bind(this), 60 * 10 * 1000)
         setTimeout(this.apiCheck.bind(this), 2000)
     }
 
